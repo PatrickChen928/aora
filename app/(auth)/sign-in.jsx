@@ -6,6 +6,7 @@ import { useState } from 'react'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 import { images } from '../../constants'
+import { signIn } from '../../lib/user'
 
 const SignIn = () => {
 
@@ -16,8 +17,21 @@ const SignIn = () => {
 
   const [loading, setLoading] = useState(false)
 
-  const submit = () => {
+  const submit = async () => {
+    if (!form.email || !form.password) {
+      Alert.alert('Error', 'All fields are required')
+      return
+    }
 
+    setLoading(true)
+    try {
+      await signIn(form.email, form.password)
+      router.replace('/home')
+    } catch (error) {
+      console.log(error)
+      Alert.alert('Error', error.message)
+    }
+    setLoading(false)
   }
 
   return (

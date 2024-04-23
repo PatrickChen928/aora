@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, Image, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import { useState } from 'react'
 
 import FormField from '../../components/FormField'
@@ -26,6 +26,7 @@ const SignUp = () => {
     setLoading(true)
     try {
       await createUser(form.username, form.email, form.password)
+      router.replace('/home')
     } catch (error) {
       console.log(error)
       Alert.alert('Error', error.message)
