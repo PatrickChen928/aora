@@ -10,7 +10,7 @@ import { useAppwrite } from '../../lib/useAppwrite'
 import VideoCard from '../../components/VideoCard'
 
 const Home = () => {
-  const { data: posts, loading, refetch } = useAppwrite(getAllPosts)
+  const { data: posts, refetch } = useAppwrite(getAllPosts)
   const { data: latestPosts } = useAppwrite(getLatestPosts)
   const [refreshing, setRefreshing] = useState(false)
 
@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={[]}
+        data={posts}
         keyExtractor={item => item.$id}
         renderItem={({ item }) => (
           <VideoCard video={item} />
