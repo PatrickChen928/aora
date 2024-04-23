@@ -5,10 +5,12 @@ import { useState } from 'react'
 
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
+import { useGlobalContext } from '../../context/GlobalProvider'
 import { images } from '../../constants'
-import { signIn } from '../../lib/user'
+import { signIn, getCurrentUser } from '../../lib/user'
 
 const SignIn = () => {
+  const { setUser, setIsLoggedIn } = useGlobalContext()
 
   const [form, setForm] = useState({
     email: '',
@@ -26,6 +28,10 @@ const SignIn = () => {
     setLoading(true)
     try {
       await signIn(form.email, form.password)
+      const user = await getCurrentUser();
+      setUser(user);
+      setIsLoggedIn(true);
+      Alert.alert("Success", "User signed in successfully");
       router.replace('/home')
     } catch (error) {
       console.log(error)
