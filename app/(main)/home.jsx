@@ -22,6 +22,8 @@ const Home = () => {
     setRefreshing(false)
   }
 
+  const onQuery = async (query) => { }
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
@@ -45,7 +47,7 @@ const Home = () => {
                 />
               </View>
             </View>
-            <SearchInput />
+            <SearchInput placeholder="Search for a video topic" />
             <View className="w-full flex-1 pt-5 pb-8">
               <Text className="text-gray-100 text-lg font-pregular mb-3">Latest Videos</Text>
               <Trending posts={latestPosts} />
