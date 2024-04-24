@@ -1,4 +1,4 @@
-import { FlatList, TouchableOpacity, ImageBackground } from 'react-native'
+import { FlatList, TouchableOpacity, ImageBackground, Image } from 'react-native'
 import { useState } from 'react'
 import * as Animatable from 'react-native-animatable'
 import { ResizeMode, Video } from 'expo-av'
@@ -22,7 +22,7 @@ const zoomOut = {
   },
 }
 
-const TrendingItem = () => {
+const TrendingItem = ({ activeItem, item }) => {
   const [play, setPlay] = useState(false)
   return (
     <Animatable.View
@@ -62,7 +62,7 @@ const TrendingItem = () => {
 }
 
 const Trending = ({ posts = [] }) => {
-  const [activeItem, setActiveItem] = useState(posts[1] || {})
+  const [activeItem, setActiveItem] = useState(posts[0] || {})
   const viewableItemsChanges = ({ viewableItems }) => {
     if (viewableItems.length) setActiveItem(viewableItems[0].key)
   }
@@ -70,7 +70,7 @@ const Trending = ({ posts = [] }) => {
     <FlatList
       data={posts || []}
       keyExtractor={item => item.$id}
-      renderItem={({ item }) => () => (
+      renderItem={({ item }) => (
         <TrendingItem activeItem={activeItem} item={item} />
       )}
       onViewableItemsChanged={viewableItemsChanges}
