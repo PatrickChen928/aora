@@ -1,6 +1,6 @@
-import { View, Text, ScrollView, Image } from 'react-native'
+import { View, Text, ScrollView, Image, Alert } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import { useState } from 'react'
 
 import FormField from '../../components/FormField'
@@ -31,7 +31,6 @@ const SignIn = () => {
       const user = await getCurrentUser();
       setUser(user);
       setIsLoggedIn(true);
-      Alert.alert("Success", "User signed in successfully");
       router.replace('/home')
     } catch (error) {
       console.log(error)

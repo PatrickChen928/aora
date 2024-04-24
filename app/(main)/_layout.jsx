@@ -1,6 +1,7 @@
 import { View, Text, Image } from 'react-native'
 import { Tabs, Redirect } from 'expo-router'
 import { icons } from '../../constants'
+import { StatusBar } from 'expo-status-bar'
 
 const TabIcon = ({ focused, color, icon, name }) => {
   return (
@@ -56,6 +57,7 @@ const MainLayout = () => {
             tabBarIcon: ({ color, focused }) => (<TabIcon icon={icons.profile} color={color} name="Profile" focused={focused} />)
           }} />
       </Tabs>
+      <StatusBar backgroundColor='#161622' style='light' />
     </>
   )
 }
