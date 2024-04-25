@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { SplashScreen, Stack } from 'expo-router'
+import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font'
 import { GlobalProvider } from '../context/GlobalProvider'
 
@@ -41,6 +42,7 @@ const RootLayout = () => {
         <Stack.Screen name="(main)" options={{ headerShown: false }} />
         <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
       </Stack>
+      <StatusBar backgroundColor='#161622' style='light' />
     </GlobalProvider>
   )
 }

@@ -1,5 +1,5 @@
-import { View, Text, FlatList } from 'react-native'
-import { useEffect } from 'react'
+import { View, Text, FlatList, ActivityIndicator } from 'react-native'
+import { Suspense, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useLocalSearchParams } from 'expo-router'
 import SearchInput from '../../components/SearchInput'
@@ -10,11 +10,21 @@ import VideoCard from '../../components/VideoCard'
 
 const Search = () => {
   const { query } = useLocalSearchParams()
-  const { data: posts, refetch } = useAppwrite(() => searchPosts(query))
+  const { data: posts, refetch, loading } = useAppwrite(() => searchPosts(query))
 
   useEffect(() => {
     refetch()
   }, [query])
+
+  if (loading) {
+    return (
+      <SafeAreaView className="bg-primary h-full">
+        <View className="h-full flex items-center ">
+          <ActivityIndicator className="mt-[50vh]" size="large" color="#FF9C28" />
+        </View>
+      </SafeAreaView>
+    )
+  }
 
   return (
     <SafeAreaView className="bg-primary h-full">
